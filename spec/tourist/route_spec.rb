@@ -3,10 +3,7 @@ require_relative '../../lib/tourist/route'
 
 describe Route do
   before do
-    opts = {from: ?A, 
-            to: ?B, 
-            departure: "09:00", 
-            arrival: "15:45", 
+    opts = {from: ?A, to: ?B, departure: "09:00", arrival: "15:45", 
             price: 300.00}
     @it = Route.new opts
   end
@@ -21,16 +18,10 @@ end # describe Route
 
 describe "#+" do
   before do
-    opts1 = {from: ?A, 
-             to: ?B, 
-             departure: "09:00", 
-             arrival: "10:00", 
+    opts1 = {from: ?A, to: ?B, departure: "09:00", arrival: "10:00", 
              price: 100.00}
     r1 = Route.new opts1
-    opts2 = {from: ?B, 
-             to: ?Z, 
-             departure: "11:00", 
-             arrival: "12:00", 
+    opts2 = {from: ?B, to: ?Z, departure: "11:00", arrival: "12:00", 
              price: 200.00}
     r2 = Route.new opts2
     @actual = r1 + r2
@@ -51,6 +42,15 @@ describe "#+" do
 end # describe #+
 
 describe "#==" do
+  before do
+    opts1 = {from: ?A, to: ?B, departure: "09:00", arrival: "10:00", 
+             price: 100.00}
+    @r1 = Route.new opts1
+    @r2 = Route.new opts1
+  end
 
+  it "compares two objects based on their attribute values only" do
+    @r1.must_equal @r2
+  end
 end
 

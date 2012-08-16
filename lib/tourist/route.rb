@@ -20,7 +20,11 @@ class Route
   end
 
   def ==(other)
-    
+    (from == other.from) &&
+      (to == other.to) &&
+      (departure == other.departure) &&
+      (arrival == other.arrival) &&
+      (price == other.price)
   end
 
   private
