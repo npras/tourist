@@ -25,7 +25,7 @@ TimeTaken: 40.0
 Price: 300.0
 
 # Given R1 and R2, get me a route from A to Z
-### Resulting Route
+### ResultingRoute
 From: A
 To: Z
 Dep: aa:00
@@ -40,5 +40,22 @@ From: X
 To: Y
 Dep:
 Arr:
-TimeTaken:
+TimeTken:
 Price: 40.0
+
+---
+
+## RouteMatrix
+
+@routes -> Array of Route
+
+matrix['A', 'B'] = 100.0
+matrix['B', 'Z'] = 200.0
+
+  A   B    Z
+A -   100  -
+B -   -    200
+Z -   -    -
+
+Get a RouteMatrix when all input data has been gathered
+For each route.
