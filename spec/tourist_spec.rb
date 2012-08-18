@@ -25,11 +25,6 @@ describe "#get_route" do
     r = Route.new opts
     result = @it.get_route(from, to, @routes)
     result.must_equal r
-    #result.from.must_equal ?a
-    #result.to.must_equal ?c
-    #result.departure.must_equal "08:00"
-    #result.arrival.must_equal "15:00"
-    #result.price.must_equal 2000.00
   end
 end # describe #get_route
 

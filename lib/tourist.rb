@@ -26,11 +26,21 @@ module Tourist
         fail NoProspectError, "No route available leading from: #{from}"
       end
 
+      # check breadth-wise
       match = prospects.find do |route|
         (route.to == to)
       end
       return match unless match.nil?
-    end
+
+      # check recursively
+      prospects.each do |route|
+        current_to = route.to
+        if current_to == to
+          #return Route.new(from: from, to: route.to, departure: departure, arrival: route.arrival, price: )
+        end
+      end # prospects.eash
+
+    end # def get_route
 
     def prospect_routes(from, routes=@routes)
       routes.find_all { |r| r.from == from }

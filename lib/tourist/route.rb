@@ -2,11 +2,13 @@ require 'time'
 
 class Route
 
-  attr_accessor :from, :to, :departure, :arrival, :price, :journey_hrs
+  attr_accessor :from, :to, :departure, :arrival, :price, :journey_hrs, :stops
 
   def initialize(opts)
     opts.each { |k,v| send("#{k}=", v) }
     @journey_hrs ||= get_journey_hrs
+    stops ||= []
+    stops << from
   end
 
   def +(other)

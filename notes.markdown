@@ -32,6 +32,7 @@ Dep: aa:00
 Arr: yy:00
 TimeTaken: 60.0
 Price: 300.0
+Stops: [B]
 
 # Given R1, R2, and R3, get me the cheapest route from X to Y
 ### Resulting Route
