@@ -1,5 +1,5 @@
 class GraphMatrix
-  attr_accessor :matrix
+  attr_reader :matrix
   
   def initialize
     @matrix = {}
