@@ -33,7 +33,7 @@ describe Graph do
 
     it "can create an edge wih default weight" do
       @it.add(:xx, :yy)
-      @it.get(:xx, :yy).must_equal [1]
+      @it.get_edge_values(:xx, :yy).must_equal [1]
     end
   end # describe #add
 
@@ -47,18 +47,18 @@ describe Graph do
     end
   end
 
-  describe "#get" do
+  describe "#get_edge_values" do
     it "gets the weight(s) for the given vertices, if present already" do
       @it.add(@v1, @v2, 100)
       @it.add(@v1, @v2, 1500)
-      @it.get(@v1, @v2).must_equal [100, 1500]
+      @it.get_edge_values(@v1, @v2).must_equal [100, 1500]
     end
 
     it "fails for vertices with no entry in the matrix" do
       @it.edges.size.must_equal 0
       @it.add(@v1, @v2, @weight)
       @it.edges.size.must_equal 1
-      ->{ @it.get(@v1, :c) }.must_raise NoEdgeError
+      ->{ @it.get_edge_values(@v1, :c) }.must_raise NoEdgeError
     end
   end # describe #get
 

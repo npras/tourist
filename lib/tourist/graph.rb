@@ -19,14 +19,14 @@ class Graph
     edges.delete [v1, v2]
   end
 
-  def get(v1, v2)
+  def get_edge_values(v1, v2)
     edges.fetch [v1, v2]
   rescue KeyError
     raise NoEdgeError, "No edge found between #{v1} and #{v2}!"
   end
 
   def get_min(v1, v2)
-    get(v1, v2).min
+    get_edge_values(v1, v2).min
   end
 
   def vertices
