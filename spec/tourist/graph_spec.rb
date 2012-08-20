@@ -6,7 +6,7 @@ describe Graph do
     @it = Graph.new
     @v1, @v2 = :a, :b
     @weight = 12
-    @vertices = [@v1, @v2]
+    @edge = [@v1, @v2]
   end
 
   it "has the edges attribute" do
@@ -20,15 +20,15 @@ describe Graph do
 
   describe "#add" do
     it "makes an entry for the given two vertices with its weight" do
-      ->{ @it.edges.fetch(@vertices) }.must_raise KeyError
+      ->{ @it.edges.fetch(@edge) }.must_raise KeyError
       @it.add(@v1, @v2, @weight)
-      @it.edges.fetch(@vertices).must_include 12
+      @it.edges.fetch(@edge).must_include 12
     end
 
     it "can set two weights for the same route" do
       @it.add(@v1, @v2, 11)
       @it.add(@v1, @v2, 12)
-      @it.edges.fetch(@vertices).must_equal [11, 12.0]
+      @it.edges.fetch(@edge).must_equal [11, 12.0]
     end
 
     it "can create an edge wih default weight" do
@@ -92,6 +92,14 @@ describe Graph do
       @it.neighbors(:a).must_equal [:b, :z].to_set
       @it.neighbors(:z).must_equal [:c, :a].to_set
     end
+  end
+
+  describe "#set_node_value" do
+    #it "sets the value associated with the given vertex to the given obj" do
+      #obj = Object.new
+      #@it.set_node_value(:a, obj)
+      #@it.vertices.fetch(:a).must_equal obj
+    #end
   end
 
 end # describe Graph
