@@ -59,4 +59,13 @@ describe GraphMatrix do
     end
   end
 
+  describe "#adjacent?" do
+    it "checks if two vertices are adjacent to each other or not" do
+      @it.adjacent?(:x, :y).must_equal false
+      @it.set(:x, :y, 1)
+      @it.adjacent?(:x, :y).must_equal true
+      @it.adjacent?(:y, :x).must_equal false
+    end
+  end
+
 end # describe GraphMatrix

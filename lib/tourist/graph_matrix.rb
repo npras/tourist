@@ -29,6 +29,10 @@ class GraphMatrix
     @matrix.keys.flatten.uniq.to_set
   end
 
+  def adjacent?(v1, v2)
+    @matrix.keys.include? [v1, v2]
+  end
+
 end # class GraphMatrix
 
 class NoRouteError < StandardError; end
