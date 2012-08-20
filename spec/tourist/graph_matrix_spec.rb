@@ -17,14 +17,21 @@ describe GraphMatrix do
     it "makes an entry for the given two vertices with its weight" do
       ->{ @it.matrix.fetch(@vertices) }.must_raise KeyError
       @it.set(@v1, @v2, @weight)
-      @it.matrix.fetch(@vertices).must_equal 12
+      @it.matrix.fetch(@vertices).must_include 12
+    end
+
+    it "can set two weights for the same route" do
+      @it.set(@v1, @v2, 11)
+      @it.set(@v1, @v2, 12)
+      @it.matrix.fetch(@vertices).must_equal [11, 12.0]
     end
   end # describe #set
 
   describe "#get" do
-    it "gets the weight for the given vertices, if present already" do
-      @it.set(@v1, @v2, @weight)
-      @it.get(@v1, @v2).must_equal @weight
+    it "gets the weight(s) for the given vertices, if present already" do
+      @it.set(@v1, @v2, 100)
+      @it.set(@v1, @v2, 1500)
+      @it.get(@v1, @v2).must_equal [100, 1500]
     end
 
     it "fails for vertices with no entry in the matrix" do
@@ -34,4 +41,22 @@ describe GraphMatrix do
       ->{ @it.get(@v1, :c) }.must_raise NoRouteError
     end
   end # describe #get
+
+  describe "#get_min" do
+    it "gets the minimum weight for the given route" do
+      @it.set(@v1, @v2, 111)
+      @it.set(@v1, @v2, 111.11)
+      @it.get_min(@v1, @v2).must_equal 111
+    end
+  end # describe #get_min
+
+  describe "#vertices" do
+    it "gets the unordered list of all vertices in the graph" do
+      @it.set(:a, :b, 100)
+      @it.set(:c, :d, 200)
+      @it.set(:e, :a, 400)
+      @it.vertices.must_equal [:a, :c, :b, :d, :e].to_set
+    end
+  end
+
 end # describe GraphMatrix
