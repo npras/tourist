@@ -15,6 +15,10 @@ class Graph
     (@edges[vertices] = []) << weight
   end
 
+  def delete(v1, v2)
+    edges.delete [v1, v2]
+  end
+
   def get(v1, v2)
     edges.fetch [v1, v2]
   rescue KeyError

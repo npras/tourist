@@ -37,6 +37,16 @@ describe Graph do
     end
   end # describe #add
 
+  describe "#delete" do
+    it "removes any existing edge between the given two vertices" do
+      @it.add(@v1, @v2)
+      @it.add(@v1, @v2, 234)
+      @it.edges.fetch([@v1, @v2]).must_equal [1, 234]
+      @it.delete(@v1, @v2)
+      ->{ @it.edges.fetch([@v1, @v2]) }.must_raise KeyError
+    end
+  end
+
   describe "#get" do
     it "gets the weight(s) for the given vertices, if present already" do
       @it.add(@v1, @v2, 100)
