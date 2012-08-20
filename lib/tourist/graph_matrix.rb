@@ -1,24 +1,24 @@
 require 'set'
 
 class GraphMatrix
-  attr_reader :matrix
+  attr_reader :edges
   
   def initialize
-    @matrix = {}
+    @edges = {}
   end
 
   def set(v1, v2, weight)
     vertices = [v1, v2]
-    @matrix[vertices] << weight
+    @edges[vertices] << weight
   rescue NoMethodError
     # initializing the key to an array for the first entry
-    (@matrix[vertices] = []) << weight
+    (@edges[vertices] = []) << weight
   end
 
   def get(v1, v2)
-    matrix.fetch [v1, v2]
+    edges.fetch [v1, v2]
   rescue KeyError
-    raise NoRouteError, "No route found between #{v1} and #{v2}!"
+    raise NoEdgeError, "No edge found between #{v1} and #{v2}!"
   end
 
   def get_min(v1, v2)
@@ -26,19 +26,19 @@ class GraphMatrix
   end
 
   def vertices
-    @matrix.keys.flatten.uniq.to_set
+    @edges.keys.flatten.uniq.to_set
   end
 
   def adjacent?(v1, v2)
-    @matrix.keys.include? [v1, v2]
+    @edges.keys.include? [v1, v2]
   end
 
-  def neighbours(vertex)
-    @matrix.map { |k, v|
+  def neighbors(vertex)
+    @edges.map { |k, v|
       k[1] if k[0] == vertex
     }.compact.to_set
   end
 
 end # class GraphMatrix
 
-class NoRouteError < StandardError; end
+class NoEdgeError < StandardError; end

@@ -9,21 +9,21 @@ describe GraphMatrix do
     @vertices = [@v1, @v2]
   end
 
-  it "has the matrix attribute" do
-    @it.matrix.class.must_equal Hash
+  it "has the edges attribute" do
+    @it.edges.class.must_equal Hash
   end
 
   describe "#set" do
     it "makes an entry for the given two vertices with its weight" do
-      ->{ @it.matrix.fetch(@vertices) }.must_raise KeyError
+      ->{ @it.edges.fetch(@vertices) }.must_raise KeyError
       @it.set(@v1, @v2, @weight)
-      @it.matrix.fetch(@vertices).must_include 12
+      @it.edges.fetch(@vertices).must_include 12
     end
 
     it "can set two weights for the same route" do
       @it.set(@v1, @v2, 11)
       @it.set(@v1, @v2, 12)
-      @it.matrix.fetch(@vertices).must_equal [11, 12.0]
+      @it.edges.fetch(@vertices).must_equal [11, 12.0]
     end
   end # describe #set
 
@@ -35,10 +35,10 @@ describe GraphMatrix do
     end
 
     it "fails for vertices with no entry in the matrix" do
-      @it.matrix.size.must_equal 0
+      @it.edges.size.must_equal 0
       @it.set(@v1, @v2, @weight)
-      @it.matrix.size.must_equal 1
-      ->{ @it.get(@v1, :c) }.must_raise NoRouteError
+      @it.edges.size.must_equal 1
+      ->{ @it.get(@v1, :c) }.must_raise NoEdgeError
     end
   end # describe #get
 
@@ -68,16 +68,16 @@ describe GraphMatrix do
     end
   end
 
-  describe "#neighbours" do
-    it "returns all the neighbours of a given vertex" do
+  describe "#neighbors" do
+    it "returns all the neighbors of a given vertex" do
       @it.set(:a, :b, 100)
       @it.set(:c, :d, 200)
       @it.set(:e, :a, 400)
       @it.set(:a, :z, 900)
       @it.set(:z, :a, 980)
       @it.set(:z, :c, 880)
-      @it.neighbours(:a).must_equal [:b, :z].to_set
-      @it.neighbours(:z).must_equal [:c, :a].to_set
+      @it.neighbors(:a).must_equal [:b, :z].to_set
+      @it.neighbors(:z).must_equal [:c, :a].to_set
     end
   end
 
