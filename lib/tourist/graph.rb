@@ -1,6 +1,6 @@
 require 'set'
 
-class GraphMatrix
+class Graph
   attr_reader :edges
 
   def initialize
@@ -39,6 +39,6 @@ class GraphMatrix
     }.compact.to_set
   end
 
-end # class GraphMatrix
+end # class Graph
 
 class NoEdgeError < StandardError; end

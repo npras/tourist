@@ -1,9 +1,9 @@
 require_relative '../spec_helper'
-require_relative '../../lib/tourist/graph_matrix'
+require_relative '../../lib/tourist/graph'
 
-describe GraphMatrix do
+describe Graph do
   before do
-    @it = GraphMatrix.new
+    @it = Graph.new
     @v1, @v2 = :a, :b
     @weight = 12
     @vertices = [@v1, @v2]
@@ -86,4 +86,4 @@ describe GraphMatrix do
     end
   end
 
-end # describe GraphMatrix
+end # describe Graph
