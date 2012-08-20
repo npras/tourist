@@ -30,6 +30,11 @@ describe Graph do
       @it.add(@v1, @v2, 12)
       @it.edges.fetch(@vertices).must_equal [11, 12.0]
     end
+
+    it "can create an edge wih default weight" do
+      @it.add(:xx, :yy)
+      @it.get(:xx, :yy).must_equal [1]
+    end
   end # describe #add
 
   describe "#get" do

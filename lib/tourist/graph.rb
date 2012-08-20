@@ -7,7 +7,7 @@ class Graph
     @edges = {}
   end
 
-  def add(v1, v2, weight)
+  def add(v1, v2, weight = 1)
     vertices = [v1, v2]
     @edges[vertices] << weight
   rescue NoMethodError
