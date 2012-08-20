@@ -68,4 +68,17 @@ describe GraphMatrix do
     end
   end
 
+  describe "#neighbours" do
+    it "returns all the neighbours of a given vertex" do
+      @it.set(:a, :b, 100)
+      @it.set(:c, :d, 200)
+      @it.set(:e, :a, 400)
+      @it.set(:a, :z, 900)
+      @it.set(:z, :a, 980)
+      @it.set(:z, :c, 880)
+      @it.neighbours(:a).must_equal [:b, :z].to_set
+      @it.neighbours(:z).must_equal [:c, :a].to_set
+    end
+  end
+
 end # describe GraphMatrix

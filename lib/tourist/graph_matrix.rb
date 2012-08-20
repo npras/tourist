@@ -33,6 +33,12 @@ class GraphMatrix
     @matrix.keys.include? [v1, v2]
   end
 
+  def neighbours(vertex)
+    @matrix.map { |k, v|
+      k[1] if k[0] == vertex
+    }.compact.to_set
+  end
+
 end # class GraphMatrix
 
 class NoRouteError < StandardError; end
