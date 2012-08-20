@@ -26,15 +26,15 @@ class GraphMatrix
   end
 
   def vertices
-    @edges.keys.flatten.uniq.to_set
+    edges.keys.flatten.uniq.to_set
   end
 
   def adjacent?(v1, v2)
-    @edges.keys.include? [v1, v2]
+    edges.keys.include? [v1, v2]
   end
 
   def neighbors(vertex)
-    @edges.map { |k, v|
+    edges.map { |k, v|
       k[1] if k[0] == vertex
     }.compact.to_set
   end
