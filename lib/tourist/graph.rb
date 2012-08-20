@@ -25,10 +25,6 @@ class Graph
     raise NoEdgeError, "No edge found between #{v1} and #{v2}!"
   end
 
-  def get_min(v1, v2)
-    get_edge_values(v1, v2).min
-  end
-
   def vertices
     edges.keys.flatten.uniq.to_set
   end

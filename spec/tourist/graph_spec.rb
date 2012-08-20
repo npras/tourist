@@ -60,15 +60,8 @@ describe Graph do
       @it.edges.size.must_equal 1
       ->{ @it.get_edge_values(@v1, :c) }.must_raise NoEdgeError
     end
-  end # describe #get
+  end # describe #get_edge_values
 
-  describe "#get_min" do
-    it "gets the minimum weight for the given route" do
-      @it.add(@v1, @v2, 111)
-      @it.add(@v1, @v2, 111.11)
-      @it.get_min(@v1, @v2).must_equal 111
-    end
-  end # describe #get_min
 
   describe "#vertices" do
     it "gets the unordered list of all vertices in the graph" do
