@@ -2,7 +2,7 @@ require 'set'
 
 class GraphMatrix
   attr_reader :edges
-  
+
   def initialize
     @edges = {}
   end

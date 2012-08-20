@@ -13,6 +13,11 @@ describe GraphMatrix do
     @it.edges.class.must_equal Hash
   end
 
+  it "initially has zero vertices and zero edges" do
+    @it.vertices.count.must_equal 0
+    @it.edges.count.must_equal 0
+  end
+
   describe "#set" do
     it "makes an entry for the given two vertices with its weight" do
       ->{ @it.edges.fetch(@vertices) }.must_raise KeyError
