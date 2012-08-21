@@ -8,11 +8,10 @@ class Graph
   end
 
   def add(v1, v2, weight = 1)
-    vertices = [v1, v2]
-    @edges[vertices] << weight
+    edge = [v1, v2]
+    @edges[edge] << weight
   rescue NoMethodError
-    # initializing the key to an array for the first entry
-    (@edges[vertices] = []) << weight
+    (@edges[edge] = []) << weight
   end
 
   def delete(v1, v2)

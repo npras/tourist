@@ -94,12 +94,4 @@ describe Graph do
     end
   end
 
-  describe "#set_node_value" do
-    #it "sets the value associated with the given vertex to the given obj" do
-      #obj = Object.new
-      #@it.set_node_value(:a, obj)
-      #@it.vertices.fetch(:a).must_equal obj
-    #end
-  end
-
 end # describe Graph
