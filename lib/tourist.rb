@@ -12,7 +12,6 @@ module Tourist
 
     def prepare
       File.foreach(InputFile) do |line|
-        p line.split
         from, to, departure, arrival, price = *line.split
         graph.add from, to, price
       end
