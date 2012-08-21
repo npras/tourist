@@ -10,7 +10,7 @@ module Tourist
       @graph = Tourist::Graph.new
     end
 
-    def prepare
+    def graphify
       File.foreach(InputFile) do |line|
         from, to, departure, arrival, price = *line.split
         graph.add from, to, price
@@ -21,5 +21,5 @@ module Tourist
 end # module Tourist
 
 if __FILE__ == $0
-  Tourist::Run.new.prepare
+  Tourist::Run.new.graphify
 end
