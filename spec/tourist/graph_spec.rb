@@ -1,9 +1,9 @@
 require_relative '../spec_helper'
 require_relative '../../lib/tourist/graph'
 
-describe Graph do
+describe Tourist::Graph do
   before do
-    @it = Graph.new
+    @it = Tourist::Graph.new
     @v1, @v2 = :a, :b
     @weight = 12
     @edge = [@v1, @v2]
@@ -58,7 +58,7 @@ describe Graph do
       @it.edges.size.must_equal 0
       @it.add(@v1, @v2, @weight)
       @it.edges.size.must_equal 1
-      ->{ @it.get_edge_values(@v1, :c) }.must_raise NoEdgeError
+      ->{ @it.get_edge_values(@v1, :c) }.must_raise Tourist::NoEdgeError
     end
   end # describe #get_edge_values
 
