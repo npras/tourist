@@ -20,9 +20,13 @@ module Tourist
     end
 
     def get_edge_values(v1, v2)
-      edges.fetch [v1, v2]
+      edges.fetch([v1, v2]).map(&:to_f)
     rescue KeyError
       raise NoEdgeError, "No edge found between #{v1} and #{v2}!"
+    end
+
+    def get_min_edge_value(v1, v2)
+      get_edge_values(v1, v2).min
     end
 
     def vertices

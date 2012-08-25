@@ -34,7 +34,7 @@ module Tourist
 
         graph.neighbors(u).each do |neighbor|
           next unless q.include? neighbor
-          alt = dist[u] + graph.get_edge_values(u, neighbor).first.to_f
+          alt = dist[u] + graph.get_min_edge_value(u, neighbor)
           if alt < dist[neighbor]
             dist[neighbor] = alt
           end
