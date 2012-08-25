@@ -39,6 +39,10 @@ module Tourist
       }.compact.to_set
     end
 
+    def neighbor_with_min_weight(v)
+      neighbors(v).min_by { |neighbor| get_edge_values v, neighbor }
+    end
+
   end # class Graph
 
   class NoEdgeError < StandardError; end

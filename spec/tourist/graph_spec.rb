@@ -94,4 +94,18 @@ describe Tourist::Graph do
     end
   end
 
+  describe "#neighbor_with_min_weight" do
+    it "returns the neighbor with the minimum weight" do
+      @it.add(:a, :b, 100)
+      @it.add(:c, :d, 200)
+      @it.add(:e, :a, 400)
+      @it.add(:a, :z, 900)
+      @it.add(:z, :a, 980)
+      @it.add(:z, :c, 880)
+      stub(@it).neighbors(:a) { [:b, :z] }
+      @it.neighbor_with_min_weight(:a).must_equal :b
+      stub(@it).neighbors(:z) { [:a, :c] }
+      @it.neighbor_with_min_weight(:z).must_equal :c
+    end
+  end
 end # describe Graph
