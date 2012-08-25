@@ -18,8 +18,8 @@ module Tourist
       File.foreach(InputFile) do |line|
         from, to, departure, arrival, price = *line.split
         journey_hrs = get_journey_hrs(departure, arrival)
-        graph.add from, to, price
-        #graph.add from, to, journey_hrs
+        #graph.add from, to, price
+        graph.add from, to, journey_hrs
       end
     end
 
@@ -42,7 +42,6 @@ module Tourist
         break if ( u == destination ) or ( dist[u] == 1.0/0.0 )
 
         graph.neighbors(u).each do |neighbor|
-          next unless q.include? neighbor
           alt = dist[u] + graph.get_min_edge_value(u, neighbor)
           if alt < dist[neighbor]
             dist[neighbor] = alt
