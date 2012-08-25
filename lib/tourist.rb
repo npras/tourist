@@ -18,19 +18,21 @@ module Tourist
       File.foreach(InputFile) do |line|
         from, to, departure, arrival, price = *line.split
         journey_hrs = get_journey_hrs(departure, arrival)
-        #graph.add from, to, price
-        graph.add from, to, journey_hrs
+        graph.add from, to, price
+        #graph.add from, to, journey_hrs
       end
     end
 
     def get_journey_hrs(departure, arrival)
-      (Time.parse(arrival) - Time.parse(departure)) / (60 * 60)
+      ( Time.parse(arrival) - Time.parse(departure) ) / ( 60 * 60 )
     end
 
     def dijkstra(source, destination)
-      dist = {}
+      dist, prev = {}, {}
       vertices = graph.vertices
-      vertices.each { |v| dist[v] = 1.0/0.0 }
+      vertices.each do |v|
+        dist[v] = 1.0/0.0 
+      end
       dist[source] = 0
       q = vertices
 
@@ -44,17 +46,26 @@ module Tourist
           alt = dist[u] + graph.get_min_edge_value(u, neighbor)
           if alt < dist[neighbor]
             dist[neighbor] = alt
+            prev[neighbor] = u
           end
         end
 
       end # while
 
-      dist[destination]
+      path = []
+      u = destination
+      while prev[u]
+        path.unshift u
+        u = prev[u]
+      end
+      path.unshift source
+
+      [ dist[destination], path.join(' -> ') ]
     end
 
   end # class Run
 end # module Tourist
 
 if __FILE__ == $0
-  p Tourist::Run.new.dijkstra 'A', 'Z'
+  puts Tourist::Run.new.dijkstra 'A', 'Z'
 end
