@@ -1,6 +1,7 @@
+require_relative "tourist/graph"
 require 'debugger'
 require 'pry'
-require_relative "tourist/graph"
+require 'time'
 
 module Tourist
   class Run
@@ -16,8 +17,14 @@ module Tourist
     def graphify
       File.foreach(InputFile) do |line|
         from, to, departure, arrival, price = *line.split
-        graph.add from, to, price
+        journey_hrs = get_journey_hrs(departure, arrival)
+        #graph.add from, to, price
+        graph.add from, to, journey_hrs
       end
+    end
+
+    def get_journey_hrs(departure, arrival)
+      (Time.parse(arrival) - Time.parse(departure)) / (60 * 60)
     end
 
     def dijkstra(source, destination)
