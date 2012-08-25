@@ -1,4 +1,5 @@
 require 'debugger'
+require 'pry'
 require_relative "tourist/graph"
 
 module Tourist
@@ -6,7 +7,7 @@ module Tourist
     InputFile = 'data/ip.txt'
 
     attr_reader :graph
-    
+
     def initialize
       @graph = Tourist::Graph.new
       graphify
@@ -19,42 +20,34 @@ module Tourist
       end
     end
 
-    #def dijkstra(source)
-      #dist = previous = {}
-      #graph.vertices.each do |v| # initializations
-        #dist[v] = 1.0/0.0 # infinity
-        #previous[v] = 1.0/0.0
-      #end
-      #dist[source] = 0 # distance to self is zero
-      #q = graph.vertices
-      #until q.empty? # main loop
-        #u = dist.min[0]
-        #q.delete u
-        #break if dist[u] == 1.0/0.0
-        ##graph.neighbors(u).each do |v|
-        #for v in graph.neighbors(u)
-          #debugger
-          #alt = dist[u] + graph.get_edge_values(u, v).first.to_i
-          #p "alt", alt
-          #p "dist[v]"
-          #p dist[v]
-          #if alt < dist[v]
-            #dist[v] = alt
-            #previous[v] = u
-            ## missing_step
-          #end # if
-        #end # for
-      #end # until
-      #dist
-    #end
+    def dijkstra(source, destination)
+      dist = {}
+      vertices = graph.vertices
+      vertices.each { |v| dist[v] = 1.0/0.0 }
+      dist[source] = 0
+      q = vertices
 
-    def my_dijkstra(source)
+      while q.include? destination
+        u = q.min_by { |v| dist[v] }
+        q.delete u
+        break if ( u == destination ) or ( dist[u] == 1.0/0.0 )
 
+        graph.neighbors(u).each do |neighbor|
+          next unless q.include? neighbor
+          alt = dist[u] + graph.get_edge_values(u, neighbor).first.to_f
+          if alt < dist[neighbor]
+            dist[neighbor] = alt
+          end
+        end
+
+      end # while
+
+      dist[destination]
     end
 
   end # class Run
 end # module Tourist
 
 if __FILE__ == $0
-  p Tourist::Run.new.dijkstra 'A'
+  p Tourist::Run.new.dijkstra 'A', 'Z'
 end
