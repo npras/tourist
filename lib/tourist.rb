@@ -16,10 +16,10 @@ module Tourist
 
     def graphify
       File.foreach(InputFile) do |line|
-        from, to, departure, arrival, price = *line.split
+        from, to, departure, arrival, price = line.split
         journey_hrs = get_journey_hrs(departure, arrival)
-        #graph.add from, to, price
-        graph.add from, to, journey_hrs
+        graph.add from, to, price
+        #graph.add from, to, journey_hrs
       end
     end
 
